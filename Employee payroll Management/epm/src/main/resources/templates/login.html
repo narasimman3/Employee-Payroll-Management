@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payroll Entry</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<form action="/login" method="post" onsubmit="return validateForm()">
+
+    <h2>Payroll Form</h2><br>
+
+    <label>Employee ID:</label><br>
+    <input type="number" name="employeeId" id="employeeId" required><br>
+
+    <label>Basic Salary:</label><br>
+    <input type="number" id="basicSalary" name="basicSalary" oninput="calculateNetSalary()" required><br>
+
+    <label>Bonus:</label><br>
+    <input type="number" id="bonus" name="bonus" value="0" oninput="calculateNetSalary()"><br>
+
+    <label>Deduction:</label><br>
+    <input type="number" id="deduction" name="deduction" value="0" oninput="calculateNetSalary()"><br>
+
+    <label>Tax Percentage:</label><br>
+    <input type="number" id="taxPercentage" name="taxPercentage" value="0" oninput="calculateNetSalary()"><br>
+
+    <label>Overtime Hours:</label><br>
+    <input type="number" id="overtimeHours" name="overtimeHours" value="0"><br>
+
+    <label>Net Salary:</label><br>
+    <input type="number" id="netSalary" name="netSalary" readonly><br>
+
+    <label>Pay Date:</label><br>
+    <input type="date" name="payDate" required><br>
+
+    <label>Payment Mode:</label><br>
+    <select name="paymentMode" required>
+        <option value="">Select</option>
+        <option value="Cash">Cash</option>
+        <option value="UPI">UPI</option>
+        <option value="Bank Transfer">Bank Transfer</option>
+    </select><br>
+
+    <label>Remarks:</label><br>
+    <input type="text" name="remarks"><br>
+
+    <button type="submit">Save Payroll</button>
+
+</form>
+
+<style>
+
+    /* ===============================
+   GLOBAL RESET
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+/* ===============================
+   PAGE BACKGROUND
+================================ */
+body {
+    min-height: 100vh;
+    background: #fff4e6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 15px;
+}
+
+/* ===============================
+   FORM CONTAINER
+================================ */
+form {
+    background: #ffffff;
+    width: 100%;
+    max-width: 600px;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(255, 153, 51, 0.25);
+}
+
+/* ===============================
+   HEADING
+================================ */
+h2 {
+    text-align: center;
+    color: #e67e22;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ffd2a6;
+}
+
+/* ===============================
+   LABELS
+================================ */
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #5a3e1b;
+}
+
+/* ===============================
+   INPUTS & SELECT
+================================ */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 11px;
+    margin-bottom: 18px;
+    border-radius: 6px;
+    border: 1px solid #f0c38e;
+    background: #fffaf5;
+    font-size: 14px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #ff9f43;
+    box-shadow: 0 0 5px rgba(255, 159, 67, 0.4);
+}
+
+/* ===============================
+   READONLY FIELD
+================================ */
+input[readonly] {
+    background-color: #f7f7f7;
+    font-weight: bold;
+}
+
+/* ===============================
+   BUTTON
+================================ */
+button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background: linear-gradient(135deg, #ff9f43, #ff7a18);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #ff851b, #e86f0c);
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+@media (max-width: 480px) {
+    form {
+        padding: 25px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+}
+
+
+</style>
+
+<script>
+function calculateNetSalary() {
+    let basic = parseFloat(document.getElementById("basicSalary").value) || 0;
+    let bonus = parseFloat(document.getElementById("bonus").value) || 0;
+    let deduction = parseFloat(document.getElementById("deduction").value) || 0;
+    let tax = parseFloat(document.getElementById("taxPercentage").value) || 0;
+
+    let gross = basic + bonus;
+    let taxAmount = (gross * tax) / 100;
+    let net = gross - taxAmount - deduction;
+
+    document.getElementById("netSalary").value = net.toFixed(2);
+}
+
+function validateForm() {
+    if (document.getElementById("employeeId").value === "") {
+        alert("Employee ID is required");
+        return false;
+    }
+    return true;
+}
+</script>
+
+</body>
+</html>

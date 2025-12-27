@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+    <link rel="stylesheet" href="/employee.css">
+</head>
+<body>
+
+
+
+<form action="/employee" method="post" onsubmit="return validateForm()">
+    <h2>Employee Registration</h2><br>
+
+    <label>Name:</label><br>
+    <input type="text" name="name" id="name" placeholder="Enter Your Name" required><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" id="email" placeholder="Enter Your Email" required><br>
+
+    <label>Address:</label><br>
+    <input type="text" name="address" id="address" placeholder="Enter Your address" required><br>
+
+    <label>Gender:</label><br>
+    <input type="radio" name="gender" id="gender" value="Male">Male
+    <input type="radio" name="gender" id="gender" value="Female">Female <br>
+
+    <label>Phone:</label><br>
+    <input type="text" name="phone" id="phone" placeholder="Enter Your Phone" required><br>
+
+    <label>Department:</label><br>
+    <input type="text" name="department" id="department" placeholder="Enter Department" required><br>
+
+    <label>Position:</label><br>
+    <input type="text" name="position" id="position" placeholder="Enter Position" required><br>
+
+    <label>Date of Joining:</label><br>
+    <input type="date" name="dateofJoining" id="dateofJoining" required><br>
+
+    <label>Status:</label><br>
+    <select name="status" id="status" required>
+        <option value="">-- Select Status --</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        <option value="On Leave">On Leave</option>
+    </select>
+    <br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<style>
+
+    /* ===============================
+   GLOBAL RESET
+================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===============================
+   PAGE BACKGROUND
+================================ */
+body {
+    min-height: 100vh;
+    background: #fff3e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===============================
+   FORM CONTAINER
+================================ */
+form {
+    width: 100%;
+    max-width: 600px;
+    background: #ffffff;
+    padding: 35px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(255, 153, 51, 0.25);
+}
+
+/* ===============================
+   TITLE
+================================ */
+h2 {
+    text-align: center;
+    color: #e67e22;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ffd2a6;
+}
+
+/* ===============================
+   LABELS
+================================ */
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #5a3e1b;
+}
+
+/* ===============================
+   INPUTS
+================================ */
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+    width: 100%;
+    padding: 11px;
+    border-radius: 6px;
+    border: 1px solid #f0c38e;
+    font-size: 14px;
+    background: #fffaf5;
+    margin-bottom: 18px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff9f43;
+    box-shadow: 0 0 5px rgba(255, 159, 67, 0.4);
+}
+
+/* ===============================
+   RADIO BUTTONS
+================================ */
+input[type="radio"] {
+    margin-right: 6px;
+}
+
+label[for="male"],
+label[for="female"] {
+    margin-right: 15px;
+}
+
+select{
+        width: 100%;
+    padding: 11px;
+    border-radius: 6px;
+    border: 1px solid #f8f5f2;
+    font-size: 14px;
+    background: #f3e1d0;
+    margin-bottom: 18px;
+    border: none;
+    width: 520px;
+    padding: 10px;
+} 
+
+/* ===============================
+   BUTTON
+================================ */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #ff9f43, #ff7a18);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #ff851b, #e86f0c);
+}
+
+/* ===============================
+   RESPONSIVE FIX
+================================ */
+@media (max-width: 600px) {
+    form {
+        margin: 20px;
+        padding: 25px;
+    }
+}
+
+
+</style>
+
+<script>
+    function validateForm() {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+
+        if (name === "" || email === "") {
+            alert("Please fill all required fields.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>

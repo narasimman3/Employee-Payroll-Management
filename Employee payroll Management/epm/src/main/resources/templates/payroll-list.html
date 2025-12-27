@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payroll List</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Employee ID</th>
+        <th>Basic</th>
+        <th>Bonus</th>
+        <th>Deduction</th>
+        <th>Net Salary</th>
+        <th>Pay Date</th>
+        <th>Payment Mode</th>
+    </tr>
+
+    <tr th:each="p : ${payrolls}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.employeeId}"></td>
+        <td th:text="${p.basicSalary}"></td>
+        <td th:text="${p.bonus}"></td>
+        <td th:text="${p.deduction}"></td>
+        <td th:text="${p.netSalary}"></td>
+        <td th:text="${p.payDate}"></td>
+        <td th:text="${p.paymentMode}"></td>
+    </tr>
+
+</table>
+
+<style>
+
+    /* ===============================
+   GLOBAL STYLES
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+/* ===============================
+   PAGE LAYOUT
+================================ */
+body {
+    background: #fff4e6;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ===============================
+   CONTAINER
+================================ */
+table {
+    width: 100%;
+    max-width: 1100px;
+    background: #ffffff;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(255, 153, 51, 0.25);
+}
+
+/* ===============================
+   HEADING
+================================ */
+h2 {
+    text-align: center;
+    color: #e67e22;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+/* ===============================
+   TABLE HEADER
+================================ */
+th {
+    background: #ff9f43;
+    color: #ffffff;
+    padding: 14px;
+    text-align: left;
+    font-size: 15px;
+}
+
+/* ===============================
+   TABLE DATA
+================================ */
+td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f2c99b;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Zebra rows */
+tr:nth-child(even) {
+    background: #fff6eb;
+}
+
+/* Hover effect */
+tr:hover {
+    background: #ffe0bf;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 15px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        padding: 10px;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: none;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #e67e22;
+    }
+}
+
+    
+</style>
+
+</body>
+</html>
